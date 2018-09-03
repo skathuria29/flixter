@@ -1,0 +1,67 @@
+<style>
+   /* .header {
+        width: 100%;
+        height: 10%;
+    } */
+
+    .container{
+        background-color: aliceblue;
+        height: 100%;
+        background-image: url("/img/background.jpg");
+    }
+
+    .signup-header {
+        height: 55px;
+        background-color: #191919;
+        color: #fff;
+        opacity: 0.8;
+    }
+    .logo{
+        height: 100%;
+        display: inline-block;
+        margin-left: 2%;
+        font-size: 33px;
+        color: #fff;
+        padding-top: 17px;
+    }
+    .logo a {
+        color: #fff;
+        opacity: 0.8;
+        padding-top: 24px;
+        font-family: 'Fjalla One', sans-serif;
+    }
+
+    .authLink{
+        float: right;
+        margin: 8px 2%;
+    }
+
+    .sign-in-btn{
+        padding: 11px;
+        font-size: 16px;
+        font-weight: 400;
+    }
+    
+</style>
+
+<div class="container">
+
+     <div class="mheader signup-header">
+        <div class="logo">
+            <a href="/" class="title"> {{ title }}</a>
+        </div>
+        
+        
+        <a href="/login" class="authLink sign-in">
+            <button class="ui button sign-in-btn">
+                Sign In
+            </button>
+        </a>
+
+    </div>
+
+    <div class="home-wrapper">
+        
+    </div>
+    
+</div>
