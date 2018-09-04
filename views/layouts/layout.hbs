@@ -9,6 +9,50 @@
         height: 100%;
     }
 
+      .container{
+        background-color: aliceblue;
+        height: 100%;
+        background-image: url("/img/background.jpg");
+    }
+
+    .signup-header {
+        height: 55px;
+        background-color: #191919;
+        color: #fff;
+        opacity: 0.8;
+    }
+    .logo{
+        height: 100%;
+        display: inline-block;
+        margin-left: 2%;
+        font-size: 33px;
+        color: #fff;
+        padding-top: 17px;
+    }
+    .logo a {
+        color: #04f385;
+        /*opacity: 0.8; */
+        padding-top: 24px;
+        font-family: 'Fjalla One', sans-serif;
+    }
+
+    .logo a:hover{
+        color: #09b767;
+        text-decoration: none;
+    }
+
+    .sign-in-container{
+        float: right;
+        margin: 8px 2%;
+    }
+
+    .sign-in-btn{
+        padding: 11px;
+        font-size: 16px;
+        font-weight: 400;
+    }
+    
+
 </style>
 
 <!DOCTYPE html>
@@ -22,8 +66,40 @@
     <script src="/js/sematic-ui/semantic.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/sematic-ui/semantic.min.css">
     <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100i" rel="stylesheet">
+
 </head>
 <body>
-    {{{ body }}}
+
+    <div class="container">
+
+        <div class="mheader signup-header">
+            <div class="logo">
+                <a href="/" class="title"> {{ title }}</a>
+            </div>
+            
+            <div class="sign-in-container">
+                {{# if user}}
+                    <div class="user-details"></div>
+                {{else}}
+                    <a href="/login" class="authLink sign-in">
+                        <button class="ui inverted button sign-in-btn">
+                            Sign In
+                        </button>
+                    </a>
+                {{/if}}     
+            </div>
+            
+        </div>
+
+        <div class="content-section">
+            {{{ body }}}
+        </div>
+        
+    </div>
+
+  
+   
 </body>
 </html>
