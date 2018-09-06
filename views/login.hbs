@@ -1,5 +1,41 @@
-{{!-- <h1> {{ title }} </h1> --}}
-<p> Welcome to {{ title }}</p>
+<style>
+    .login-body{
+           height: 80%;
+        width: 32%;
+        position: absolute;
+        /* margin: 0 auto; */
+        bottom: 0px;
+        left: 35%;
+        padding: 3%;
+        background-color: rgba(0,0,0,.75);
+    }
+    .login-form-header{
+        color: white;
+        opacity: 0.8;
+        font-family: 'Lato';
+        font-weight: 200;
+    }
+
+</style>
+
+<div class="login-body">
+    <div class="login-form-body">
+        <div class="login-form-content">
+            <h1 class="login-form-header"> Sign In</h1>
+            <form method="POST" class="login-form">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" class="form-control" name="username" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" name="password" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
 
 <script>
     $('.sign-in-container').css('display' , 'none');

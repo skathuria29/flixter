@@ -21,5 +21,9 @@ router.get('/login' , (req, res) =>{
     res.render('login' , { title : 'MovieDB'});
 })
 
+router.get('/register' , (req, res) =>{
+    res.render('register' , { title : 'MovieDB'});
+})
+
 module.exports = router;
 
