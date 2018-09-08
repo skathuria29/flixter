@@ -9,11 +9,53 @@
         padding: 3%;
         background-color: rgba(0,0,0,.75);
     }
+
+    .login-form{
+        margin-bottom: 25px;
+    }
+
     .login-form-header{
         color: white;
         opacity: 0.8;
         font-family: 'Lato';
         font-weight: 200;
+        margin-bottom: 25px;
+    }
+
+    .form-group label{
+        color: white;
+        opacity: 0.7;
+    }
+
+    .signInBtn{
+        width: 100%;
+        /* padding: 8px; */
+        margin: 24px 0px 12px 0px;
+    }
+
+    .line {
+        display: inline-block;
+        width: 46%;
+        border: 0.5px solid #888888;
+    }
+
+    .signup-link{
+        text-align: center;
+        padding: 25px;
+        color: white;
+        opacity: 0.7;
+        cursor: pointer;
+    }
+
+    .signup-link a{
+        text-decoration: none;
+        color: white;
+        opacity: 0.7;
+    }
+
+    .signup-link:hover{
+        text-decoration: none;
+        opacity: 0.9;
     }
 
 </style>
@@ -21,18 +63,28 @@
 <div class="login-body">
     <div class="login-form-body">
         <div class="login-form-content">
-            <h1 class="login-form-header"> Sign In</h1>
+            <h2 class="login-form-header"> Sign In</h2>
             <form method="POST" class="login-form">
                 <div class="form-group">
-                    <label>Username</label>
-                    <input type="text" class="form-control" name="username" placeholder="Username">
+                    <label>Email</label>
+                    <input type="text" class="form-control" name="username" placeholder="Email">
                 </div>
                 <div class="form-group">
                     <label>Password</label>
                     <input type="password" class="form-control" name="password" placeholder="Password">
                 </div>
-                <button type="submit" class="btn btn-default">Submit</button>
+                <button type="submit" class="btn btn-default signInBtn">Sign In</button>
             </form>
+
+           <div class="separation-line">
+                <div  class="line"></div>
+                <div style="display:inline-block;color:#989898;">Or</div>
+                <div class="line"></div>
+           </div>
+
+           <div class="signup-link">
+               <a href="/register">Create new account</a>
+           </div>
         </div>
     </div>
 </div>

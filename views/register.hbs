@@ -1,0 +1,100 @@
+<style>
+    .register-body{
+           height: 80%;
+        width: 32%;
+        position: absolute;
+        /* margin: 0 auto; */
+        bottom: 0px;
+        left: 35%;
+        padding: 3%;
+        background-color: rgba(0,0,0,.75);
+    }
+
+    .register-form{
+        margin-bottom: 25px;
+    }
+
+    .register-form-header{
+        color: white;
+        opacity: 0.8;
+        font-family: 'Lato';
+        font-weight: 200;
+        margin-bottom: 25px;
+    }
+
+    .form-group label{
+        color: white;
+        opacity: 0.7;
+    }
+
+    .signInBtn{
+        width: 100%;
+        /* padding: 8px; */
+        margin: 24px 0px 12px 0px;
+    }
+
+    .line {
+        display: inline-block;
+        width: 46%;
+        border: 0.5px solid #888888;
+    }
+
+    .signup-link{
+        text-align: center;
+        padding: 25px;
+        color: white;
+        opacity: 0.7;
+        cursor: pointer;
+    }
+
+    .signup-link a{
+        text-decoration: none;
+        color: white;
+        opacity: 0.7;
+    }
+
+    .signup-link:hover{
+        text-decoration: none;
+        opacity: 0.9;
+    }
+
+</style>
+
+
+<div class="register-body">
+    <div class="register-form-body">
+        <div class="register-form-content">
+            <h2 class="register-form-header"> Register Now</h2>
+            <form method="POST" class="register-form">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" class="form-control" name="username" placeholder="Username">
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="text" class="form-control" name="username" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" name="password" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-default signInBtn">Register</button>
+            </form>
+
+           <div class="separation-line">
+                <div  class="line"></div>
+                <div style="display:inline-block;color:#989898;">Or</div>
+                <div class="line"></div>
+           </div>
+
+           <div class="signup-link">
+               <a href="/login">Sign Up</a>
+           </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('.sign-in-container').css('display' , 'none');
+</script>
