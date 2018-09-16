@@ -59,25 +59,35 @@
     }
 
 </style>
-
+{{#if user}}
+        <div class="alert alert-danger">{{success}}</div> 
+{{/if}}
+{{#if mail}}
+        <div class="alert alert-danger">Email has taken already try new</div> 
+{{/if}} 
+{{#if errors}}
+      {{#each errors}}
+        <div class="alert alert-danger">{{msg}}</div>
+      {{/each}}
+{{/if}}
 
 <div class="register-body">
     <div class="register-form-body">
         <div class="register-form-content">
             <h2 class="register-form-header"> Register Now</h2>
-            <form method="POST" class="register-form">
+            <form method="POST" action="/register" class="register-form">
                 <div class="form-group">
                     <label>Username</label>
-                    <input type="text" class="form-control" name="username" placeholder="Username">
+                    <input type="text" class="form-control" name="username" placeholder="Username" required>
                 </div>
 
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="text" class="form-control" name="username" placeholder="Email">
+                    <input type="text" class="form-control" name="email" placeholder="Email" required>
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="password" class="form-control" name="password" placeholder="Password">
+                    <input type="password" class="form-control" name="password" placeholder="Password" required>
                 </div>
                 <button type="submit" class="btn btn-default signInBtn">Register</button>
             </form>
@@ -89,7 +99,7 @@
            </div>
 
            <div class="signup-link">
-               <a href="/login">Sign Up</a>
+               <a href="/login">Sign In</a>
            </div>
         </div>
     </div>
