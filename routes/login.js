@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const url = require('url');
+const passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 
 const User = require('../models/user');
 
@@ -25,11 +27,40 @@ router.get('/login' , (req, res) =>{
     res.render('login' , { title : 'MovieDB' , info  : req.flash('info')});
 })
 
-// router.post('/login',
-//     passport.authenticate('local', { successRedirect: '/', failureRedirect: '/users/login', failureFlash: true }),
-//     function (req, res) {
-//     res.redirect('/browse');
-// }); 
+passport.use(new LocalStrategy(
+	function (email, password, done) {
+		User.getUserByEmail(email, function (err, user) {
+			if (err) throw err;
+			if (!user) {
+				return done(null, false, { message: 'Unknown User' });
+			}
+
+			User.comparePassword(password, user.password, function (err, isMatch) {
+				if (err) throw err;
+				if (isMatch) {
+					return done(null, user);
+				} else {
+					return done(null, false, { message: 'Invalid password' });
+				}
+			});
+		});
+	}));
+
+passport.serializeUser(function (user, done) {
+	done(null, user.id);
+});
+
+passport.deserializeUser(function (id, done) {
+	User.getUserById(id, function (err, user) {
+		done(err, user);
+	});
+});
+
+router.post('/login',
+    passport.authenticate('local', {  failureRedirect: '/login', failureFlash: true }),
+    function (req, res) {
+    res.redirect('/browse');
+}); 
 
 
 
@@ -79,29 +110,8 @@ router.post('/register' , (req, res) =>{
                 
                 User.registerUser(new_user, function (err, user) {
                     if (err) throw err;
-
-                    // res.render('browse' , {
-                    //     user : new_user
-                    // })
-                    // req.session.isLoggedIn = true;
-                    // req.session.user = {
-                    //     username : username,
-                    //     email : email
-                    // }
-                    // res.redirect('/browse');
                     req.flash('info' ,'Succesfully registered! Sign In to continue.');
                     res.redirect('/login');
-                  //  res.render('/login' , {  reg_success : 'Successfully Registered! Sign In now'})
-
-                    // res.redirect(url.format({
-                    //     pathname:"/login",
-                    //     query: {
-                    //         reg_success : 'Successfully Registered! Sign In now'
-                    //      }
-                    //   }));
-                    // res.redirect('/login' , {
-                    //     
-                    // })
                 });
                 
             }
