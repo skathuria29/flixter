@@ -23,8 +23,12 @@ function ensureAuthenticated(req, res, next){
 }
 
 router.get('/login' , (req, res) =>{
-    let msg = req.query ? (req.query.reg_success ? req.query.reg_success : null ) : null;
-    res.render('login' , { title : 'MovieDB' , info  : req.flash('info')});
+   // let msg = req.query ? (req.query.reg_success ? req.query.reg_success : null ) : null;
+    let messages = {
+        success : req.flash('success') || [],
+        error : req.flash('error') || [] 
+    } 
+    res.render('login' , { title : 'MovieDB' , info  : messages});
 })
 
 passport.use(new LocalStrategy(
@@ -57,10 +61,8 @@ passport.deserializeUser(function (id, done) {
 });
 
 router.post('/login',
-    passport.authenticate('local', {  failureRedirect: '/login', failureFlash: true }),
-    function (req, res) {
-    res.redirect('/browse');
-}); 
+    passport.authenticate('local', { successRedirect: '/home/browse', failureRedirect: '/login', failureFlash: true }
+)); 
 
 
 
@@ -110,7 +112,7 @@ router.post('/register' , (req, res) =>{
                 
                 User.registerUser(new_user, function (err, user) {
                     if (err) throw err;
-                    req.flash('info' ,'Succesfully registered! Sign In to continue.');
+                    req.flash('success' ,'Succesfully registered! Sign In to continue.');
                     res.redirect('/login');
                 });
                 
