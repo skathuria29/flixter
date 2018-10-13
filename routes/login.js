@@ -3,21 +3,24 @@ const router = express.Router();
 const url = require('url');
 const passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+const sendEmail = require('../mailer');
 
 const User = require('../models/user');
 
-router.get('/', ensureAuthenticated, function(req, res){
-    //res.render('index');
-    res.send('authenticated');
+router.get('/', ensureAuthenticated, function(req, res, next){
+
+    if(req.isAuthenticated()){
+		return next();
+	} else {
+		//req.flash('error_msg','You are not logged in');
+		res.redirect('/home/browse');
+	}
 });
 
 function ensureAuthenticated(req, res, next){
 	if(req.isAuthenticated()){
 		return next();
 	} else {
-		//req.flash('error_msg','You are not logged in');
-        // res.redirect('/users/login');
-        //res.send('register yourself');
         res.render('home' , {title : 'MovieDB', user : null})
 	}
 }
@@ -112,6 +115,13 @@ router.post('/register' , (req, res) =>{
                 
                 User.registerUser(new_user, function (err, user) {
                     if (err) throw err;
+                    const message = `Hi! ${new_user.username} <br>
+                                    <b> Welcome to MovieDB </b>
+                                    <p>Thanks for registering an account on The Movie Database (TMDb).
+                                     We are excited to see you join the community!</p>
+                                    `
+                    //'Hi!' + new_user.username + '<br>' + 'Thanks for registering an account on The Movie Database (TMDb). We are excited to see you join the community!'
+                    sendEmail(new_user.email, 'Welcome to MovieDB', message);
                     req.flash('success' ,'Succesfully registered! Sign In to continue.');
                     res.redirect('/login');
                 });
