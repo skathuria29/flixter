@@ -18,8 +18,10 @@
     "express-validator": "^5.3.0",
     "mongoose": "^5.2.13",
     "mustache": "^2.3.2",
+    "nodemailer": "^4.6.8",
     "passport": "^0.4.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "request": "^2.88.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.4"

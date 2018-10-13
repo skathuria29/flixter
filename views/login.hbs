@@ -6,8 +6,8 @@
         /* margin: 0 auto; */
         bottom: 0px;
         left: 35%;
-        padding: 3%;
-        background-color: rgba(0, 0, 0, .75);
+        padding: 1% 2% 1% 2%;
+        background-color: rgba(0,0,0,.75);
     }
 
     .login-form {
@@ -58,76 +58,31 @@
         opacity: 0.9;
     }
 
-    #snackbar {
-            {
-                {
-                 !-- visibility: hidden;
-                --
-            }
-        }
-        min-width: 250px;
-        margin-left: -125px;
-        background-color: #333;
-        color: #fff;
-        text-align: center;
-        border-radius: 2px;
-        padding: 16px;
-        position: fixed;
-        z-index: 1;
-        left: 50%;
-        bottom: 30px;
-        font-size: 17px;
+    .popup-notification {
+        color: white;
+        position: absolute;
+        top: 63px;
+        right: 0px;
+        height: 60px;
+        width: 320px;
+        padding: 1%;
+        background-color: gray;
+        border-radius: 1%;
+        font-style: italic;
+        -webkit-animation: fadeinout 10s linear backwards;
+        animation: fadeinout 10s linear backwards;
+        opacity: 0;
     }
 
-    #snackbar.show {
-        visibility: visible;
-        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    @-webkit-keyframes fadeinout {
+        50% { opacity: 1; }
     }
 
-    @-webkit-keyframes fadein {
-        from {
-            bottom: 0;
-            opacity: 0;
-        }
-        to {
-            bottom: 30px;
-            opacity: 1;
-        }
+    @keyframes fadeinout {
+        50% { opacity: 1; }
     }
 
-    @keyframes fadein {
-        from {
-            bottom: 0;
-            opacity: 0;
-        }
-        to {
-            bottom: 30px;
-            opacity: 1;
-        }
-    }
-
-    @-webkit-keyframes fadeout {
-        from {
-            bottom: 30px;
-            opacity: 1;
-        }
-        to {
-            bottom: 0;
-            opacity: 0;
-        }
-    }
-
-    @keyframes fadeout {
-        from {
-            bottom: 30px;
-            opacity: 1;
-        }
-        to {
-            bottom: 0;
-            opacity: 0;
-        }
-    }
+  
 
     .ui-message-container{
         color: white;
@@ -144,10 +99,13 @@
         display: inline-block;
         font-weight: bold;
     }
+
 </style>
 
 {{#if info.success.length}}
-<div id="snackbar show">{{info}}</div>
+    {{#each info.success}}
+        <div class="popup-notification show">{{this}}</div>
+    {{/each}}
 {{/if}}
 
 <div class="login-body">

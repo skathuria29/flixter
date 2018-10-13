@@ -1,1 +1,140 @@
-<div>Hello Iam in browse view</div>
+<style>
+    .browse-view{
+        position: relative;
+        height: 100%;
+        z-index: 0;
+        padding-top: 2%;
+        width: 90%;
+    }
+
+    .browse-view-item{
+        width: 18%;
+        height: 140px;
+        float: left;
+        background-color: #272626;
+        margin: 0px 1% 2% 1%;
+    }
+
+    .browse-view-container{
+        width: 90%;
+        height: 100%;
+        margin: 0 auto;
+        
+    }
+
+    .content-section{
+        background-color: #141414;
+    }
+
+</style>
+
+<div class="browse-view">
+    <div class="browse-view-container">
+        {{#if data.length}}
+            {{#each data}}
+                <div class="browse-view-item"></div>
+            {{/each}}
+        {{/if}}
+    </div>
+    
+    {{!-- <div class="loading-data-dots">
+        <div class="loader" id="loader-4">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div> --}}
+</div>
+
+
+<script>
+    $('.sign-in-container').css('display' , 'none');
+        $('.app-container').css('background-image', 'none');
+        window.lastHeight = 0;
+        const pageNumber = {{page}};
+        console.log(pageNumber);
+
+        let loadMoreData = () => {
+            debugger
+            // var scrollTop = $(window).scrollTop();
+
+            if ($(window).scrollTop() == ($(document).height() - $(window).height())) {
+                //alert("reached");
+
+                if($('.browse-view-container').hasClass('loading-data')){
+
+                }
+                else{
+
+                    $('.browse-view-container').append(window.loadingDots);
+                    $('.browse-view-container').addClass('loading-data');
+
+                    let maxHeight = $('.browse-view').height();
+                    let loadingDivHeight = $('#loader-4').height() + 10;
+                    $('.content-section').css({
+                        'height' : maxHeight + loadingDivHeight + "px"
+                    })
+                    //get data
+
+
+                   
+                }
+
+                //get data    
+
+            }
+
+        {{!-- var st = $(this).scrollTop();
+        if (st > lastHeight){
+            // Is scrolling down... Increase height of div
+            $('.browse-view-container').append(window.loadingDots);
+            $('.browse-view-container').addClass('loading-data');
+            let maxHeight = $('.browse-view').height();
+            $('.content-section').css({
+                'height' : maxHeight + 100 + "px"
+            })
+
+
+
+        } else {
+            // Is scrolling up, do nothing...
+        }
+        lastHeight = st;
+
+        if($('.browse-view-container').hasClass('.loading-data')){
+
+        }
+        else{
+
+        } --}}
+
+
+        {{!-- if (scrollTop > 0) {
+           // maxHeight = 150;
+           $('.browse-view-container').append(window.loadingDots);
+           $('.browse-view-container').addClass('loading-data');
+           maxHeight = $('.browse-view').height() + 50;
+        } 
+        
+        else if (scrollTop > 400) {
+            maxHeight = 75;
+        } else {
+            maxHeight = 150 - 75 * ((scrollTop - 200)) / 200;
+        } --}}
+
+        {{!-- $('.browse-view').css({
+            'max-height' : maxHeight + "px"
+        })
+
+        $('.content-section').css({
+            'height' : maxHeight + 100 + "px"
+        }) --}}
+    }
+
+    window.addEventListener('scroll', loadMoreData);
+
+    
+    
+
+   
+</script>
