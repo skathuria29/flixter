@@ -126,6 +126,17 @@
         }
     }
 
+    .user-signout{
+        position: fixed;
+        right: 30px;
+        top: 20px;
+        cursor: pointer;
+    }
+    .user-signout i{
+        font-size: 1.2em;
+        color: #ccc;
+    }
+
 </style>
 
 <!DOCTYPE html>
@@ -140,6 +151,8 @@
     <script src="/js/bootstrap/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/sematic-ui/semantic.min.css">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    {{!-- <link rel="stylesheet" type="text/css" href="/css/font-awesome/font-awesome-v4.7.css"> --}}
     <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato:100i" rel="stylesheet">
@@ -155,8 +168,12 @@
             </div>
             
             <div class="sign-in-container">
-                {{# if user}}
-                    <div class="user-details"></div>
+                {{#if user}}
+                    <div class="user-details">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        <div class="user-details username">{{user.name}}</div>
+                    </div>
+                    <div class="user-signout"><i class="fas fa-sign-out-alt"></i></div>
                 {{else}}
                     <a href="/login" class="authLink sign-in">
                         <button class="ui inverted button sign-in-btn">
@@ -181,9 +198,9 @@
 
 
 <script>
-    //debugger
+    debugger
     window.loadingDots = $('<div class="loader" id="loader-4"><span></span><span></span><span></span></div>')
-
+    const user = {{@user}};
     window.addEventListener('scroll', stickyHeader);
 
     var header = document.getElementById("pinning-header");
