@@ -4,17 +4,20 @@ const url = require('url');
 const passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 const sendEmail = require('../mailer');
+const ensureAuth = require('./auth');
 
 const User = require('../models/user');
 
-router.get('/', ensureAuthenticated, function(req, res, next){
-
-    if(req.isAuthenticated()){
-		return next();
-	} else {
-		//req.flash('error_msg','You are not logged in');
-		res.redirect('/home/browse');
-	}
+router.get('/', ensureAuth, function(req, res, next){
+    // let user = null;
+    // if(req.user){ 
+    //     user = {
+    //         name : req.user.username,
+    //         email : req.user.email
+    //     }
+    // }
+    res.redirect('/home/browse');
+    //res.render('/home/browse' , {title : 'MovieDB' , user : user});
 });
 
 function ensureAuthenticated(req, res, next){
@@ -63,9 +66,22 @@ passport.deserializeUser(function (id, done) {
 	});
 });
 
+
 router.post('/login',
-    passport.authenticate('local', { successRedirect: '/home/browse', failureRedirect: '/login', failureFlash: true }
-)); 
+  passport.authenticate('local', { failureRedirect: '/login' , failureFlash : true }),
+  function(req, res) {
+    res.redirect('home/browse');
+  });
+
+// router.post('/login',
+//   //  passport.authenticate('local', { successRedirect: '/home/browse', failureRedirect: '/login', failureFlash: true })
+//   passport.authenticate('local', (err, user, info) => {
+//     if(err)
+//         return res.redirect('/login');
+//     else 
+//         return res.redirect('/home/browse');
+//   })
+// ); 
 
 
 
