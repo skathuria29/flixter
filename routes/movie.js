@@ -28,4 +28,38 @@ router.get('/browse', ensureAuth, (req, res) => {
     
 })
 
+router.get('/movie/:mid', ensureAuth, (req,res) => {
+
+    const movie_id = req.params.mid;
+    const url = base_uri + `/3/movie/${movie_id}?api_key=${apiKey}&language=en-US`;
+    request(url  , { json : true} , (err, resp, body) => {
+        if (err) { return console.log(err); }
+
+        let user = null;
+        if(req.user){ 
+            user = {
+                name : req.user.username,
+                email : req.user.email
+            }
+        }
+
+        let out = [{
+            'backdrop_path' : body.backdrop_path,
+            'homepage' : body.homepage,
+            'imdb_id' : body.imdb_id,
+            'title' : body.original_title,
+            'overview' : body.overview,
+            'poster_path' : body.poster_path,
+            'release_date' : body.release_date,
+            'production_companies' : body.production_companies,
+            'production_countries' : body.production_countries,
+            'popularity' : body.popularity
+        }];
+
+        //res.json(body);
+        res.render('movie-info', {'title' : 'MovieDB' , 'user' : user,  'data' : out})
+
+    })
+})
+
 module.exports = router;

@@ -2,6 +2,7 @@
     html {
         height: 100%;
         width: 100%;
+        font-size: 62.5%;
     }
 
     body {
@@ -11,7 +12,6 @@
     }
 
     .app-container {
-        {{!-- height: 100%; --}}
         width: 100%;
         background-repeat: no-repeat;
         background-size: cover;
@@ -20,6 +20,7 @@
         flex: 1 1 auto;
         min-height: 100%;
         height: auto;
+        font-family: 'Fjalla One', sans-serif;
     }
 
     .mheader.sticky {
@@ -129,12 +130,25 @@
     .user-signout{
         position: fixed;
         right: 30px;
-        top: 20px;
+        top: 22px;
         cursor: pointer;
     }
     .user-signout i{
         font-size: 1.2em;
         color: #ccc;
+    }
+
+    .user-details{
+        position: fixed;
+        right: 60px;
+        top: 20px;
+    }
+
+    .user-details .username{
+        display: inline-block;
+        padding: 0px 10px 0px 2px;
+        font-family: 'Fjalla One', sans-serif;
+        font-weight: 200;
     }
 
 </style>
@@ -198,9 +212,9 @@
 
 
 <script>
-    debugger
+    //debugger
     window.loadingDots = $('<div class="loader" id="loader-4"><span></span><span></span><span></span></div>')
-    const user = {{@user}};
+    {{!-- const user = {{@user}}; --}}
     window.addEventListener('scroll', stickyHeader);
 
     var header = document.getElementById("pinning-header");
