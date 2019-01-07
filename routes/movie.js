@@ -3,6 +3,7 @@ const router = express.Router();
 const {apiKey, base_uri} = require('../config/settings');
 const request = require('request');
 const ensureAuth = require('./auth');
+const moment = require('moment');
 
 router.get('/browse', ensureAuth, (req, res) => {
 
@@ -43,18 +44,29 @@ router.get('/movie/:mid', ensureAuth, (req,res) => {
             }
         }
 
+
+
         let out = [{
+            'movie_id' : body.id,
             'backdrop_path' : body.backdrop_path,
             'homepage' : body.homepage,
             'imdb_id' : body.imdb_id,
             'title' : body.original_title,
             'overview' : body.overview,
             'poster_path' : body.poster_path,
-            'release_date' : body.release_date,
+            'release_date' : moment(new Date(body.release_date)).format('DD MMM YYYY'),
             'production_companies' : body.production_companies,
             'production_countries' : body.production_countries,
-            'popularity' : body.popularity
+            'popularity' : body.popularity,
+            'duration' : `${body.runtime / 60 ^ 0}hr ` + body.runtime % 60 + 'm',
+            'genres' : body.genres
         }];
+
+        if(out[0].genres.length >0){
+            for(let each of out[0].genres){
+                each['genre_link'] =  base_uri + `/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&with_genres=${each.id}`;
+            }
+        }
 
         //res.json(body);
         res.render('movie-info', {'title' : 'MovieDB' , 'user' : user,  'data' : out})

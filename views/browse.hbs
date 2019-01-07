@@ -163,7 +163,7 @@
                            setTimeout(function(){
                                 for(let each of results){
                                     let html = `<div class="browse-view-item">
-                                            <a href="" ><img class="browser-card-img" src="https://image.tmdb.org/t/p/w500/${each.poster_path}"> </a>
+                                            <a href="/home/movie/${each.id}" ><img class="browser-card-img" src="https://image.tmdb.org/t/p/w500/${each.poster_path}"> </a>
                                              <div class="card-info">
                                                 <div class="card-name">${each.original_title}</div>
                                                 <div class="card-released-date">${each.release_date}</div>

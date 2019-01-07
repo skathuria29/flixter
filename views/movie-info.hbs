@@ -9,7 +9,7 @@
     }
 
     .movie-info-container {
-        width: 90%;
+        width: 75%;
         height: 75%;
         padding: 2%;
         margin: 0 auto;
@@ -33,6 +33,7 @@
     }
     .movie-info .poster-wrapper{
         padding-left: 50px;
+        color: #c6c6c6;
     }
 
     .header.poster{
@@ -42,6 +43,11 @@
         font-size: 1.7rem;
     }
 
+    .header.poster a {
+        text-decoration: none;
+        color: inherit;
+    }
+
     .header-info{
         color: #c6c6c6;
     }
@@ -49,6 +55,46 @@
         font-size: 0.9rem;
         font-weight: 300;
         width: 70%;
+    }
+
+    .movie-info .subtext{
+        font-size: 0.8rem;
+        display: flex;
+        align-items: flex-start;
+        color: inherit;
+        flex-wrap: nowrap;
+        margin-bottom: 30px;
+    }
+
+    .movie-info .subtext .release_date{
+        padding-right: 30px;
+        border-right: 1px solid #ccc;
+    }
+    .movie-info .subtext .duration{
+        padding: 0px 30px;
+        text-align: center;
+        border-right: 1px solid #ccc;
+    }
+
+    .movie-info .subtext .genre{
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: flex-start;
+        padding: 0px 30px;
+        border-right: 1px solid #ccc;
+    }
+    .movie-info .subtext .genre a{
+        text-decoration: none;
+        color: inherit;
+        text-align: center;
+        padding: 0px 5px;
+    }
+    .movie-info .subtext .trailer{
+        padding: 0px 30px;
+        cursor: pointer
+    }
+    .subtext .trailer span{
+        padding: 0px 5px;
     }
 </style>
 
@@ -61,7 +107,21 @@
                 </div>
                 <div class="movie-info poster-wrapper"> 
                     <div class="header poster">
-                         <div class="movie-name">{{this.title}}</div>
+                         <a href="https://www.imdb.com/title/{{this.imdb_id}}"><div class="movie-name">{{this.title}}</div></a>
+                    </div>
+                    <div class="subtext">
+                        <div class="release_date">{{this.release_date}}</div>
+                        <div class="duration">{{this.duration}}</div>
+                        <div class="genre">
+                            {{#if genres.length}}
+                                {{#each genres}}
+                                    <a href="{{this.genre_link}}"><span class="genre-item">{{this.name}}</span></a>
+                                {{/each}}
+                            {{/if}}
+                        </div>
+                        <div class="trailer" onclick="playTrailer({{this.movie_id}})">
+                            <span><i class="fas fa-play"></i></span>Play trailer
+                        </div>
                     </div>
                     <div class="header-info">
                         <div style="margin-bottom: 8px;font-size: 1.2rem;">Overview</div>
@@ -72,3 +132,9 @@
         {{/if}}
     </div>
 </div>
+
+<script>
+   const playTrailer = (movie_id) => {
+       debugger
+   }
+</script>
