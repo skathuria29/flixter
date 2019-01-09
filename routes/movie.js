@@ -4,8 +4,54 @@ const {apiKey, base_uri} = require('../config/settings');
 const request = require('request');
 const ensureAuth = require('./auth');
 const moment = require('moment');
+const async = require('async');
 
-router.get('/browse', ensureAuth, (req, res) => {
+const browse = require('./browse');
+
+router.get('/browse',  ensureAuth, (req, res) => {
+    async.parallel({
+
+        'Now Playing' : function(callback){
+            browse.getNowPlaying(function(err, data){
+                callback(null, data);
+            })
+        },
+        'Upcoming' : function(callback){
+            browse.getUpcoming(function(err, data){
+                callback(null, data);
+            })
+        },
+        'Top Rated' : function(callback){
+            browse.getTopRated(function(err, data){
+                callback(null, data);
+            })
+        }
+
+
+     }, function(err, results){
+        console.log(results);
+        let out = [];
+        for(let each in results){
+            let temp = {};
+            temp['title'] = each;
+            temp['data'] = results[each];
+            out.push(temp);
+        }
+
+        let user = null;
+        if(req.user){ 
+            user = {
+                name : req.user.username,
+                email : req.user.email
+            }
+        }
+
+
+        res.render('main' , { title : 'MovieDB' , 'result' : out ,  'user' : user});
+     })
+})
+
+router.get('/genre', ensureAuth, (req, res) => {
 
     //get movies
     const url = base_uri + '/3/discover/movie?api_key=' + apiKey + "&language=en-US&sort_by=popularity.desc";
