@@ -1,0 +1,89 @@
+<style>
+    .main-view{
+        width: 100%;
+        height: 100%;
+        padding: 2% 0px;
+    }
+
+    .billboard{
+        width: 100%;
+        height: 100%;
+        color: #c6c6c6;
+    }
+
+    .billboard-card-item{
+        width: 100%;
+        height: 200px;
+        margin-bottom: 2%;
+    }
+
+    .billboard-card-item .rowHeader{
+        height: 25px;
+    }
+
+    .billboard-card-item .content{
+        height: calc( 100% - 25px );
+        padding: 5px 3%;
+    }
+
+    .content-section{
+        background-color: #141414;
+    }
+
+    .slider-container img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .slick-initialized .slick-slide{
+        margin: 0px 20px;
+        cursor: pointer;
+    }
+
+    .slick-slide.hover{
+        -webkit-transform: scale(1.2);
+        -moz-transform: scale(1.2);
+        -o-transform: scale(1.2);
+        transform: scale(1.2);
+        z-index: 2;
+    }
+
+
+</style>
+
+<div class="main-view">
+    <div class="billboard">
+        {{#if result.length}}
+            {{#each result}}
+                <div class="billboard-card-item">
+                    <div class="rowHeader">
+                        <span class="rowTitle">{{this.title}}</span>
+                    </div>
+                    <div class="content">
+                        <div class="slider-container">
+                            {{#if this.data.length}}
+                                {{#each this.data}}
+                                    <div><img class="browser-card-img" src="https://image.tmdb.org/t/p/w500/{{this.backdrop_path}}"></div>
+                                {{/each}}
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+        {{/if}}
+        
+    </div>
+</div>
+
+<script>
+
+    $(function(){
+        debugger
+         $('.slider-container').slick({infinite: true,
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                arrows: true
+        })
+    })
+   
+</script>
