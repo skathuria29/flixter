@@ -5,12 +5,12 @@
 
     .movie-info{
         width: 100%;
-        height: 100%;
+        height: 75%;
     }
 
     .movie-info-container {
-        width: 75%;
-        height: 75%;
+        width: 90%;
+        height: 100%;
         padding: 2%;
         margin: 0 auto;
         background-color: #191919;
@@ -19,6 +19,8 @@
         display: flex;
         align-items: flex-start;
         flex-wrap: nowrap;
+        background-size: cover!important;
+        background-position: 50%!important;
     }
 
     .movie-info-poster {
@@ -32,8 +34,9 @@
         height: 100%;
     }
     .movie-info .poster-wrapper{
-        padding-left: 50px;
+       padding: 10px 0px 0px 50px;
         color: #c6c6c6;
+        background: rgba(0,0,0,.8);
     }
 
     .header.poster{
@@ -96,12 +99,44 @@
     .subtext .trailer span{
         padding: 0px 5px;
     }
+
+    .movie-content-wrapper .similar-movies{
+        width: 100%;
+        height: 420px;
+        margin: 4% 0px;
+    }
+    .slider-container img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .slider-container{
+        width: 95%;
+        margin: 0 auto;
+    }
+
+    .slick-initialized .slick-slide{
+        margin: 0px 5px;
+        cursor: pointer;
+    }
+
+    {{!-- .slick-slide.hover{
+        -webkit-transform: scale(1.2);
+        -moz-transform: scale(1.2);
+        -o-transform: scale(1.2);
+        transform: scale(1.2);
+        z-index: 2;
+    } --}}
+    
+    .slick-prev:before, .slick-next:before{
+        color: #515151;
+    }
 </style>
 
 <div class="movie-info">
-    <div class="movie-info-container">
-        {{#if data.length}}
-            {{#each data}}
+    {{#if data.length}}
+        {{#each data}}
+            <div class="movie-info-container" style="background:url('https://image.tmdb.org/t/p/w500/{{this.backdrop_path}}')">
                 <div class="movie-info-poster">
                     <img src="https://image.tmdb.org/t/p/w500/{{this.poster_path}}">
                 </div>
@@ -128,13 +163,37 @@
                         <div class="movie-overview">{{this.overview}}</div>
                     </div>
                 </div>
-            {{/each}}
-        {{/if}}
-    </div>
+             </div>
+        {{/each}}
+    {{/if}}
+</div>
+
+<div class="movie-content-wrapper" style="width: 100%;">
+    {{#if this.similar.length}}
+         <div class="similar-movies">
+            <h1>Similar Movies</h1>
+            <div class="content">
+                <div class="slider-container">
+                   
+                        {{#each this.similar}}
+                            <div><a href="/home/movie/{{this.id}}"><img class="browser-card-img" src="https://image.tmdb.org/t/p/w500/{{this.poster_path}}"></a></div>
+                        {{/each}}
+                    
+                </div>
+            </div>
+        </div>
+    {{/if}}
 </div>
 
 <script>
    const playTrailer = (movie_id) => {
        debugger
    }
+
+    $('.slider-container').slick({infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        arrows: true,
+            accessibility: false
+    })
 </script>
