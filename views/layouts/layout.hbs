@@ -65,7 +65,7 @@
 
     .sign-in-container {
         float: right;
-        margin: 19px 2%;
+        margin: 10px 2%;
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
@@ -135,7 +135,7 @@
         right: 30px;
         top: 22px; --}}
         cursor: pointer;
-        padding-top: 2px;
+        padding-top: 10px;
         margin-left: 15px;
     }
     .user-signout i{
@@ -147,6 +147,7 @@
         {{!-- position: fixed;
         right: 60px;
         top: 20px; --}}
+        padding-top: 8px;
     }
 
     .user-details .username{
@@ -198,7 +199,7 @@
                         <i class="fa fa-user" aria-hidden="true"></i>
                         <div class="user-details username">{{user.name}}</div>
                     </div>
-                    <div class="user-signout"><i class="fas fa-sign-out-alt"></i></div>
+                    <a href="/logout"> <div class="user-signout"><i class="fas fa-sign-out-alt"></i></div> </a>
                 {{else}}
                     <a href="/login" class="authLink sign-in">
                         <button class="ui inverted button sign-in-btn">
