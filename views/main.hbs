@@ -1,5 +1,10 @@
 <style>
+
     .main-view{
+        width: 100%;
+        height: 100%;
+    }
+    .main-view-container{
         width: 100%;
         height: 100%;
         visibility: hidden;
@@ -15,7 +20,7 @@
 
     .billboard-card-item{
         width: 100%;
-        height: 420px;
+        height: 300px;
         margin: 4% 0px;
     }
 
@@ -58,9 +63,9 @@
         transform: scale(1.2);
         z-index: 2;
     } --}}
-    
+
     .slick-prev:before, .slick-next:before{
-        color: #515151;
+        color: #8d8d8d;
     }
 
     .main-view .latest-movie{
@@ -89,44 +94,50 @@
         color: #c6c6c6;
     }
 
+    .fixed-loader{
+        position: absolute;
+        top: 20%;
+        right: 45%;
+    }
+
 
 </style>
 
 <div class="main-view">
-    <div class="latest-movie">
-        {{#if latest.length}}
-            {{#each latest}}
-                <a href="/home/movie/{{this.id}}">
-                    <div class="latest-card" style="background:linear-gradient(rgba(0, 0, 0, 0) 39%, rgba(0, 0, 0, 0) 41%, rgba(0, 0, 0, 0.65) 100%), url('http://image.tmdb.org/t/p/w1280/{{this.backdrop_path}}'), rgb(28, 28, 28)"> 
-                        <div class="latest-card-info">
-                            <h1>{{this.title}}</h1>
-                            <div class="">{{this.overview}}</div>
-                        </div>
-                    </div>
-                </a>
-            {{/each}}
-        {{/if}}
-    </div>
-    <div class="billboard">
-        {{#if result.length}}
-            {{#each result}}
-                <div class="billboard-card-item">
-                    <div class="rowHeader">
-                        <span class="rowTitle">{{this.title}}</span>
-                    </div>
-                    <div class="content">
-                        <div class="slider-container">
-                            {{#if this.data.length}}
-                                {{#each this.data}}
-                                    <div><a href="/home/movie/{{this.id}}"><img class="browser-card-img" src="https://image.tmdb.org/t/p/w500/{{this.poster_path}}"></a></div>
-                                {{/each}}
-                            {{/if}}
-                        </div>
+    <div class="main-view-container">
+        <div class="latest-movie">
+            {{#if latest.length}} {{#each latest}}
+            <a href="/home/movie/{{this.id}}">
+                <div class="latest-card" style="background:linear-gradient(rgba(0, 0, 0, 0) 39%, rgba(0, 0, 0, 0) 41%, rgba(0, 0, 0, 0.65) 100%), url('http://image.tmdb.org/t/p/w1280/{{this.backdrop_path}}'), rgb(28, 28, 28)">
+                    <div class="latest-card-info">
+                        <h1>{{this.title}}</h1>
+                        <div class="">{{this.overview}}</div>
                     </div>
                 </div>
-            {{/each}}
-        {{/if}}
-        
+            </a>
+            {{/each}} {{/if}}
+        </div>
+        <div class="billboard">
+            {{#if result.length}} {{#each result}}
+            <div class="billboard-card-item">
+                <div class="rowHeader">
+                    <span class="rowTitle">{{this.title}}</span>
+                </div>
+                <div class="content">
+                    <div class="slider-container">
+                        {{#if this.data.length}} {{#each this.data}}
+                        <div>
+                            <a href="/home/movie/{{this.id}}">
+                                <img class="browser-card-img" src="https://image.tmdb.org/t/p/w500/{{this.poster_path}}">
+                            </a>
+                        </div>
+                        {{/each}} {{/if}}
+                    </div>
+                </div>
+            </div>
+            {{/each}} {{/if}}
+
+        </div>
     </div>
 </div>
 
@@ -134,16 +145,17 @@
 
     $(function(){
         debugger
-        {{!-- $('.main-v').append(window.loadingDots);
-        $('.browse-view-container').addClass('loading-data'); --}}
+        $('.main-view').prepend(window.loadingDots);
+        $('.main-view').find('.loader').addClass('fixed-loader');
         setTimeout(function(){
+            $('.main-view').find('.loader').remove();
              $('.slider-container').slick({infinite: true,
-                slidesToShow: 4,
-                slidesToScroll: 4,
+                slidesToShow: 5,
+                slidesToScroll: 5,
                 arrows: true,
-                 accessibility: false
+                accessibility: false
             })
-            $('.main-view').css('visibility' , 'visible');
+            $('.main-view-container').css('visibility' , 'visible');
         },300)
         
     })

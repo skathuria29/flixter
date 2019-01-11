@@ -65,7 +65,10 @@
 
     .sign-in-container {
         float: right;
-        margin: 8px 2%;
+        margin: 19px 2%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
     }
 
     .sign-in-btn {
@@ -128,10 +131,12 @@
     }
 
     .user-signout{
-        position: fixed;
+        {{!-- position: fixed;
         right: 30px;
-        top: 22px;
+        top: 22px; --}}
         cursor: pointer;
+        padding-top: 2px;
+        margin-left: 15px;
     }
     .user-signout i{
         font-size: 1.2em;
@@ -139,9 +144,9 @@
     }
 
     .user-details{
-        position: fixed;
+        {{!-- position: fixed;
         right: 60px;
-        top: 20px;
+        top: 20px; --}}
     }
 
     .user-details .username{

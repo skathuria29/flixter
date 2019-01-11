@@ -37,6 +37,7 @@
        padding: 10px 0px 0px 50px;
         color: #c6c6c6;
         background: rgba(0,0,0,.8);
+        height: 100%;
     }
 
     .header.poster{
@@ -102,8 +103,16 @@
 
     .movie-content-wrapper .similar-movies{
         width: 100%;
-        height: 420px;
+        height: 250px;
         margin: 4% 0px;
+        padding: 5px 3%;
+    }
+
+    .movie-content-wrapper .movie-credits{
+        width: 100%;
+        height: 60%;
+        margin: 4% 0px;
+        padding: 0px 3%;
     }
     .slider-container img {
         width: 100%;
@@ -131,6 +140,33 @@
     .slick-prev:before, .slick-next:before{
         color: #515151;
     }
+
+    .movie-content-wrapper{
+        width: 100%;
+        color: #c6c6c6;
+    }
+
+    .credit-card-item {
+        width: 8%;
+        height: 130px;
+        margin: 0px 2% 5% 0px;
+    }
+    .credit-card-item img{
+        width: 100%;
+        height: 100%;
+    }
+
+    .credit-content{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        flex-flow: row wrap;
+        place-content: stretch flex-start;
+        align-items: stretch;
+    }
+    
 </style>
 
 <div class="movie-info">
@@ -168,10 +204,27 @@
     {{/if}}
 </div>
 
-<div class="movie-content-wrapper" style="width: 100%;">
+<div class="movie-content-wrapper">
+    {{#if this.credits.length}}
+        <div class="movie-credits">
+            <h4>Credits</h4>
+            <div class="credit-content">
+                {{#each this.credits}}
+                    <div class="credit-card-item">
+                        <img class="credit-card-item" src="https://image.tmdb.org/t/p/w500/{{this.profile_path}}" alt="/img/no-image.png">
+                        <div class="credit-info">
+                            <h6>{{this.name}}</h6>
+                            <p></p>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    {{/if}}
+
     {{#if this.similar.length}}
          <div class="similar-movies">
-            <h1>Similar Movies</h1>
+            <h4>Similar Movies</h4>
             <div class="content">
                 <div class="slider-container">
                    
@@ -191,8 +244,8 @@
    }
 
     $('.slider-container').slick({infinite: true,
-        slidesToShow: 4,
-        slidesToScroll: 4,
+        slidesToShow: 6,
+        slidesToScroll: 6,
         arrows: true,
             accessibility: false
     })
