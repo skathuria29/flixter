@@ -47,7 +47,19 @@ const getSimilarMovies = (id, callback) => {
     })
 }
 
+const getMovieCredits = (id, callback) => {
+    const url = base_uri + `/3/movie/${id}/credits?api_key=${apiKey}&language=en-US`;
+    request(url  , { json : true} , (err, resp, body) => {
+        if(err)
+            return callback(null, [])
+        if(body)
+            callback(null, body.cast.splice(0, 12));
+
+    })
+}
+
 module.exports ={
     getMovieInfo,
-    getSimilarMovies
+    getSimilarMovies,
+    getMovieCredits
 }

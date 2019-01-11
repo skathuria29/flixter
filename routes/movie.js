@@ -90,6 +90,11 @@ router.get('/movie/:mid', ensureAuth, (req,res) => {
                 callback(null, data);
             })
         },
+        'credits' : function(callback){
+            movieInfo.getMovieCredits(movie_id, function(err, data){
+                return callback(null, data)
+            })
+        },
         'similar' : function(callback){
             movieInfo.getSimilarMovies(movie_id, function(err, data){
                 callback(null, data);
@@ -105,7 +110,7 @@ router.get('/movie/:mid', ensureAuth, (req,res) => {
         }
 
         //res.json(body);
-        res.render('movie-info', {'title' : 'MovieDB' , 'user' : user,  'data' : results['info'] , 'similar' : results['similar']})
+        res.render('movie-info', {'title' : 'MovieDB' , 'user' : user,  'data' : results['info'] , 'credits' : results['credits'] , 'similar' : results['similar']})
     })
 
 })
