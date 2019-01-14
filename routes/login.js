@@ -5,6 +5,7 @@ const passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 const sendEmail = require('../mailer');
 const ensureAuth = require('./auth');
+const {APPNAME} = require('../config/settings');
 
 const User = require('../models/user');
 
@@ -17,14 +18,14 @@ router.get('/', ensureAuth, function(req, res, next){
     //     }
     // }
     res.redirect('/home/browse');
-    //res.render('/home/browse' , {title : 'MovieDB' , user : user});
+    //res.render('/home/browse' , {title : APPNAME , user : user});
 });
 
 function ensureAuthenticated(req, res, next){
 	if(req.isAuthenticated()){
 		return next();
 	} else {
-        res.render('home' , {title : 'MovieDB', user : null})
+        res.render('home' , {title : APPNAME, user : null})
 	}
 }
 
@@ -34,7 +35,7 @@ router.get('/login' , (req, res) =>{
         success : req.flash('success') || [],
         error : req.flash('error') || [] 
     } 
-    res.render('login' , { title : 'MovieDB' , info  : messages});
+    res.render('login' , { title : APPNAME , info  : messages});
 })
 
 passport.use(new LocalStrategy(
@@ -92,11 +93,11 @@ router.get('/logout', function (req, res) {
 
 
 router.get('/register' , (req, res) =>{
-    res.render('register' , { title : 'MovieDB'});
+    res.render('register' , { title : APPNAME});
 })
 
 router.post('/register' , (req, res) =>{
-    //res.render('register' , { title : 'MovieDB'});
+    //res.render('register' , { title : APPNAME});
     let email = req.body.email;
     let username = req.body.username;
     let password = req.body.password;
@@ -124,7 +125,7 @@ router.post('/register' , (req, res) =>{
             if (mail) {
                 res.render('register', {
                     mail: mail,
-                    title : 'MovieDB'
+                    title : APPNAME
                     
                 });
             }

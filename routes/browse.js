@@ -1,4 +1,4 @@
-const {apiKey, base_uri} = require('../config/settings');
+const {apiKey, base_uri, APPNAME} = require('../config/settings');
 const request = require('request');
 
 const getNowPlaying = (callback) => {
