@@ -3,8 +3,9 @@
         position: relative;
         height: 100%;
         z-index: 0;
-        padding-top: 3%;
+        padding-top: 2%;
         width: 90%;
+        color: #c6c6c6;
     }
 
     .browse-view-item{
@@ -22,7 +23,7 @@
         width: 90%;
         height: 100%;
         margin: 0 auto;
-        
+        margin-top: 2%;
     }
 
     .content-section{
@@ -84,36 +85,49 @@
         margin-top: 5px;
     }
 
+    .data-error-message{
+        text-align: center;
+        font-size: 2rem;
+    }
+    
+
 </style>
 
 <div class="browse-view">
+    <h4>> {{header}}</h4>
     <div class="browse-view-container">
         {{#if data.length}}
             {{#each data}}
                 <div class="browse-view-item">
-                    <a href = "/home/movie/{{this.id}}"> <img class="browser-card-img" src="https://image.tmdb.org/t/p/w500/{{this.poster_path}}"></a>
-                    <div class="card-info">
+                    <a href = "/home/movie/{{this.id}}"> <img class="browser-card-img" src="https://image.tmdb.org/t/p/w500/{{this.poster_path}}" alt="" onerror="this.src='/img/no-image.png'"></a>
+                    {{!-- <div class="card-info">
                         <div class="card-name">{{original_title}}</div>
                         <div class="card-released-date">{{release_date}}</div>
                         <div class="card-overview">{{overview}}</div>
-                    </div>
+                    </div> --}}
                 </div>
             {{/each}}
+            {{else}}
+                <div class="data-error-message">No Data!</div>
         {{/if}}
+        
+
     </div>
-    
-    {{!-- <div class="loading-data-dots">
-        <div class="loader" id="loader-4">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </div> --}}
 </div>
 
 
 <script>
-        const url = "{{url}}";
+        debugger
+       // const url = "{{url}}";
+        let search = '';
+        let genre = '' ;
+        {{#if search}}
+            search = "{{search}}";
+        {{/if}}
+
+        {{#if genre}}
+            genre = "{{genre}}";
+        {{/if}}
        
         $('.app-container').css('background-image', 'none');
         window.lastHeight = 0;
@@ -144,9 +158,21 @@
                 if($('.browse-view-container').hasClass('loading-data')){
                     debugger
                     //make an ajax call and ask for more data
-                    const url = 'http://api.themoviedb.org/3/discover/movie',
-                        key = '?api_key=dc2c0d121d43c7efe3c541ff85273040',
+                    let url = '' ,  extraParams = '';
+                    const key = '?api_key=dc2c0d121d43c7efe3c541ff85273040';
+                    if(search){
+                         url =  'http://api.themoviedb.org/3/search/movie';
+                         extraParams = `&language=en-US&sort_by=popularity.desc&query=${search}`;
+                    }
+                    else if(genre){
+                         url = 'http://api.themoviedb.org/3/discover/movie';
+                        extraParams = `&language=en-US&sort_by=popularity.desc&with_genres=${genre}`;
+                    }
+                    else{
+                        url = 'http://api.themoviedb.org/3/discover/movie';
                         extraParams = "&language=en-US&sort_by=popularity.desc";
+                    }
+                      
 
                     $.ajax({
                         type: 'GET',
@@ -163,7 +189,7 @@
                            setTimeout(function(){
                                 for(let each of results){
                                     let html = `<div class="browse-view-item">
-                                            <a href="/home/movie/${each.id}" ><img class="browser-card-img" src="https://image.tmdb.org/t/p/w500/${each.poster_path}"> </a>
+                                            <a href="/home/movie/${each.id}" ><img class="browser-card-img" src="https://image.tmdb.org/t/p/w500/${each.poster_path}" alt="" onerror="this.src='/img/no-image.png'"> </a>
                                              <div class="card-info">
                                                 <div class="card-name">${each.original_title}</div>
                                                 <div class="card-released-date">${each.release_date}</div>

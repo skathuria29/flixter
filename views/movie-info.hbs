@@ -174,7 +174,7 @@
         {{#each data}}
             <div class="movie-info-container" style="background:url('https://image.tmdb.org/t/p/w500/{{this.backdrop_path}}')">
                 <div class="movie-info-poster">
-                    <img src="https://image.tmdb.org/t/p/w500/{{this.poster_path}}">
+                    <img src="https://image.tmdb.org/t/p/w500/{{this.poster_path}}" alt="" onerror="this.src='/img/no-image.png'">
                 </div>
                 <div class="movie-info poster-wrapper"> 
                     <div class="header poster">
@@ -186,7 +186,7 @@
                         <div class="genre">
                             {{#if genres.length}}
                                 {{#each genres}}
-                                    <a href="{{this.genre_link}}"><span class="genre-item">{{this.name}}</span></a>
+                                    <a href="/home/genre/{{this.name}}/{{this.id}}"><span class="genre-item">{{this.name}}</span></a>
                                 {{/each}}
                             {{/if}}
                         </div>
@@ -211,7 +211,7 @@
             <div class="credit-content">
                 {{#each this.credits}}
                     <div class="credit-card-item">
-                        <img class="credit-card-item" src="https://image.tmdb.org/t/p/w500/{{this.profile_path}}" alt="/img/no-image.png">
+                        <img class="credit-card-item" src="https://image.tmdb.org/t/p/w500/{{this.profile_path}}" alt="" onerror="this.src='/img/no-image.png'">
                         <div class="credit-info">
                             <h6>{{this.name}}</h6>
                             <p></p>
@@ -229,7 +229,7 @@
                 <div class="slider-container">
                    
                         {{#each this.similar}}
-                            <div><a href="/home/movie/{{this.id}}"><img class="browser-card-img" src="https://image.tmdb.org/t/p/w500/{{this.poster_path}}"></a></div>
+                            <div><a href="/home/movie/{{this.id}}"><img class="browser-card-img" src="https://image.tmdb.org/t/p/w500/{{this.poster_path}}" alt="" onerror="this.src='/img/no-image.png'"></a></div>
                         {{/each}}
                     
                 </div>
@@ -241,6 +241,21 @@
 <script>
    const playTrailer = (movie_id) => {
        debugger
+        $.ajax({
+            type: 'GET',
+            url: '/home/movie/:mid/videos',
+            contentType: 'application/json',
+            dataType : 'json',
+            success: function(videos) {
+                debugger
+               // $('body').html(html);
+            },
+            error: function(e) {
+                debugger
+                console.log(e.message);
+            }
+
+        })
    }
 
     $('.slider-container').slick({infinite: true,
