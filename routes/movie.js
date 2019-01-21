@@ -30,7 +30,7 @@ router.get('/browse',  ensureAuth, (req, res) => {
 
 
      }, function(err, results){
-        console.log(results);
+        //console.log(results);
         let latest = [];
         if(results['Now Playing'].length){
             latest.push(results['Now Playing'][0])

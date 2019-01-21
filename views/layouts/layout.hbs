@@ -253,7 +253,7 @@
 
 
 <script>
-    //debugger
+    
     window.loadingDots = $('<div class="loader" id="loader-4"><span></span><span></span><span></span></div>')
     {{!-- const user = {{@user}}; --}}
     window.addEventListener('scroll', stickyHeader);
@@ -262,7 +262,7 @@
     var sticky = header.offsetTop;
 
     function stickyHeader() {
-        ////debugger
+        //
         if (window.pageYOffset > sticky) {
             header.classList.add("sticky");
         } else {
@@ -271,9 +271,9 @@
     }
 
     $('.ui.movieSearch.input').on('change' , function(){
-        debugger
+        
         const search_words = $(this).find('input').val();
-        console.log(search_words);
+        //console.log(search_words);
 
         $.ajax({
             type: 'POST',
@@ -282,11 +282,11 @@
             data : JSON.stringify({keyword : search_words}),
             dataType : 'html',
             success: function(html) {
-                debugger
+                
                 $('body').html(html);
             },
             error: function(e) {
-                debugger
+                
                 console.log(e.message);
             }
 

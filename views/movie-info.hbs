@@ -207,7 +207,7 @@
 <div class="movie-content-wrapper">
     {{#if this.credits.length}}
         <div class="movie-credits">
-            <h4>Credits</h4>
+            <h4>Cast</h4>
             <div class="credit-content">
                 {{#each this.credits}}
                     <div class="credit-card-item">
@@ -240,18 +240,18 @@
 
 <script>
    const playTrailer = (movie_id) => {
-       debugger
+       
         $.ajax({
             type: 'GET',
             url: '/home/movie/:mid/videos',
             contentType: 'application/json',
             dataType : 'json',
             success: function(videos) {
-                debugger
+                
                // $('body').html(html);
             },
             error: function(e) {
-                debugger
+                
                 console.log(e.message);
             }
 

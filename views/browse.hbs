@@ -117,7 +117,7 @@
 
 
 <script>
-        debugger
+        
        // const url = "{{url}}";
         let search = '';
         let genre = '' ;
@@ -132,7 +132,7 @@
         $('.app-container').css('background-image', 'none');
         window.lastHeight = 0;
         let pageNumber = {{page}};
-        console.log(pageNumber);
+        //console.log(pageNumber);
 
         let getMovies = (url, page) => {
             return new Promise((resolve, reject) => {
@@ -140,8 +140,8 @@
                         method : 'GET',
                         url : url + "&page="+ pageNumber,
                         success:function(data) {
-                            debugger
-                            console.log(data);
+                            
+                            //console.log(data);
                         }
                     })
             })
@@ -156,7 +156,7 @@
                 //alert("reached");
                 pageNumber += 1;
                 if($('.browse-view-container').hasClass('loading-data')){
-                    debugger
+                    
                     //make an ajax call and ask for more data
                     let url = '' ,  extraParams = '';
                     const key = '?api_key=dc2c0d121d43c7efe3c541ff85273040';
@@ -181,7 +181,7 @@
                         contentType: 'application/json',
                         dataType: 'jsonp',
                         success: function(json) {
-                            debugger
+                            
                            // console.dir(json);
                             $('.browse-view-container').find('.loader').remove();
                             const results = json.results;
@@ -228,15 +228,15 @@
     window.addEventListener('scroll', loadMoreData);
 
     {{!-- $('.browse-view-item').hover(function(){
-        debugger
+        
     }) --}}
 
     $('.browse-view-container').on('hover' , '.browser-view-item' , function(){
-        debugger
+        
     }) 
 
     $('.browse-view-container').on('click' , '.browse-view-item' , function(){
-        debugger
+        
     })    
     
 
