@@ -4,7 +4,8 @@
   "description": "an online movie database for informaton related to films, programs etc.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
@@ -23,7 +24,8 @@
     "nodemailer": "^4.6.8",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "mongodb" : "^2.2.9"
   },
   "devDependencies": {
     "nodemon": "^1.18.4"

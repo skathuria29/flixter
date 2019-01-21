@@ -10,7 +10,7 @@ var session = require('express-session');
 
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/moviedb');
+mongoose.connect('mongodb://mongo/moviedb');
 
 const app = express();
 
