@@ -3,7 +3,7 @@ const request = require('request');
 const moment = require('moment');
 
 const getMovieInfo = (id, callback) => {
-    const url = base_uri + `/3/movie/${id}?api_key=${apiKey}&language=en-US`;
+    const url = base_uri + `/3/movie/${id}?api_key=${apiKey}&language=en-US&append_to_response=videos`;
     request(url  , { json : true} , (err, resp, body) => {
         if(err)
             return callback(null, [])
@@ -22,7 +22,8 @@ const getMovieInfo = (id, callback) => {
                 'production_countries' : body.production_countries,
                 'popularity' : body.popularity,
                 'duration' : `${body.runtime / 60 ^ 0}hr ` + body.runtime % 60 + 'm',
-                'genres' : body.genres
+                'genres' : body.genres,
+                'trailer' : body.videos ? (body.videos.results.length ? body.videos.results[0].key : '' ): ''
             }];
     
             if(out[0].genres.length >0){

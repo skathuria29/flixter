@@ -4,7 +4,8 @@ function ensureAuthenticated(req, res, next){
 	if(req.isAuthenticated()){
 		return next();
 	} else {
-        res.render('home' , {title : APPNAME, user : null})
+		res.redirect("/login");
+	//res.render('home' , {title : APPNAME, user : null})
 	}
 }
 
