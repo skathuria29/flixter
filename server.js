@@ -10,7 +10,7 @@ var session = require('express-session');
 
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://mongo/moviedb');
+mongoose.connect('mongodb://localhost:27017/moviedb');
 
 const app = express();
 
@@ -60,15 +60,6 @@ app.use(expressValidator({
 
 // Connect Flash
 app.use(flash());
-
-
-// app.use('/movies' , movies);
-
-// app.get('/', (rq, res) => {
-//     res.send('Hello world!');
-// })
-
-
 
 app.use('/', routes);
 app.use('/home', movies);
