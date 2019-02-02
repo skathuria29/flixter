@@ -15,6 +15,17 @@ Flixter is a movie database powered by The Movie Database (TMDB) API.
 - Node.js ( [download](https://nodejs.org/en/download/) )
 - Mongodb ( [download](https://www.mongodb.com/download-center/community) )
 
+### Walkthrough
+  
+<img src="https://github.com/skathuria29/flixter/blob/master/login.gif">
+<br />
+<img src="https://github.com/skathuria29/flixter/blob/master/browse.gif">
+<br />
+<img src="https://github.com/skathuria29/flixter/blob/master/movie-info.gif">
+<br />
+<img src="https://github.com/skathuria29/flixter/blob/master/genre-search.gif">
+
+
 ### Usage
 With [npm](https://npmjs.org/) and node.js installed with mongodb running
 ```
