@@ -166,6 +166,11 @@
         place-content: stretch flex-start;
         align-items: stretch;
     }
+
+    .trailer .youtube-link {
+        color: inherit;
+        text-decoration: none;
+    }
     
 </style>
 
@@ -190,9 +195,13 @@
                                 {{/each}}
                             {{/if}}
                         </div>
-                        <div class="trailer" onclick="playTrailer({{this.movie_id}})">
-                            <span><i class="fas fa-play"></i></span>Play trailer
+                       
+                        <div class="trailer">
+                            <a href="#" class="youtube-link" youtubeid="{{trailer}}">
+                                <span><i class="fas fa-play"></i></span>Play trailer
+                            </a>
                         </div>
+                       
                     </div>
                     <div class="header-info">
                         <div style="margin-bottom: 8px;font-size: 1.2rem;">Overview</div>
@@ -239,7 +248,7 @@
 </div>
 
 <script>
-   const playTrailer = (movie_id) => {
+   {{!-- const playTrailer = (movie_id) => {
        
         $.ajax({
             type: 'GET',
@@ -256,7 +265,11 @@
             }
 
         })
-   }
+   } --}}
+
+   $(".youtube-link").grtyoutube({
+       autoPlay : true
+   })
 
     $('.slider-container').slick({infinite: true,
         slidesToShow: 6,
