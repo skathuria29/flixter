@@ -71,12 +71,41 @@
 
     .sign-in-container {
         float: right;
-        margin: 18px 2%;
+        margin : 15px 3%;
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
     }
 
+    .user-signout{
+        {{!-- position: fixed;
+        right: 30px;
+        top: 22px; --}}
+        cursor: pointer;
+        padding-top: 10px;
+        margin-left: 15px;
+    }
+    .user-signout i{
+        font-size: 1.2em;
+        color: #ccc;
+    }
+
+    .user-details{
+        padding-top: 8px;
+        display : none ;
+    }
+
+    .user-details .username{
+        display: inline-block;
+        padding: 0px 10px 0px 2px;
+        font-family: 'Fjalla One', sans-serif;
+        font-weight: 200;
+    }
+
+    .sign-in-container .search {
+        margin-right: 0px;
+    }
+    
     .sign-in-btn {
         padding: 11px;
         font-size: 16px;
@@ -96,11 +125,12 @@
 
 
     .loader {
-        width: 100px;
-        height: 100px;
+        width: 100%;
+        height: 60px;
         border-radius: 100%;
         position: relative;
         margin: 0 auto;
+        text-align: center;
     }
 
     #loader-4 span {
@@ -136,33 +166,7 @@
         }
     }
 
-    .user-signout{
-        {{!-- position: fixed;
-        right: 30px;
-        top: 22px; --}}
-        cursor: pointer;
-        padding-top: 10px;
-        margin-left: 15px;
-    }
-    .user-signout i{
-        font-size: 1.2em;
-        color: #ccc;
-    }
-
-    .user-details{
-        {{!-- position: fixed;
-        right: 60px;
-        top: 20px; --}}
-        padding-top: 8px;
-    }
-
-    .user-details .username{
-        display: inline-block;
-        padding: 0px 10px 0px 2px;
-        font-family: 'Fjalla One', sans-serif;
-        font-weight: 200;
-    }
-
+    
     .slider-container img {
         width: 100%;
         height: 100%;
@@ -172,9 +176,131 @@
         transition: .3s ease-in-out;
     }
 
-    .browser-card-img:hover {
+    .billboard .browser-card-img:hover {
         -webkit-transform: scale(0.9);
         transform: scale(0.9);
+    }
+
+    /* ------ */
+    .browse-view{
+        position: relative;
+        height: 100%;
+        z-index: 0;
+        padding-top: 2%;
+        width: 90%;
+        color: #c6c6c6;
+    }
+   
+
+    .browse-view-item{
+        width: 140px;
+        height: 180px;
+        float: left;
+        background-color: #272626;
+        margin: 10px;
+        cursor: pointer;
+        position: relative;
+    }
+   
+    .browse-view-container{
+        width: 95%;
+        height: 100%;
+        margin: 0 auto;
+        margin-top: 2%;
+    }
+
+      
+    .browser-card-img{
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transition:all .2s ease-in-out;
+        -webkit-transition:all .2s ease-in-out;
+        -moz-transition:all .2s ease-in-out;
+        -ms-transition:all .2s ease-in-out;
+        -o-transition:all .2s ease-in-out;
+    }
+
+    .browser-card-img:hover{
+        -webkit-transform: scale(1.2);
+        -moz-transform: scale(1.2);
+        -o-transform: scale(1.2);
+        transform: scale(1.2);
+        z-index: 2;
+    }
+
+     .card-info {
+        position: absolute;
+        bottom: 0%;
+        height: 200px;
+        color: white;
+        padding: 10px;
+        /* background-color: #605f5f; */
+        /* opacity: 0.5; */
+        width: 100%;
+        background-color: rgba(183, 183, 183, 0.3);
+        display: none;
+    }
+
+    .card-name {
+        font-weight: bold;
+        height: 25px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    .card-release-date{
+        height: 20px;
+    }
+
+    .card-overview{
+        display: -webkit-box;
+        -webkit-line-clamp: 7;
+        -webkit-box-orient: vertical;
+        /* max-width: 156px; */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: 130px;
+        font-size: 0.9em;
+        margin-top: 5px;
+    }
+
+    /* ---- media queries ---- */
+     @media (min-width : 45rem){
+        .browse-view-item{
+            width: 18%;
+            height: 250px;
+            float: left;
+            background-color: #272626;
+            margin: 0px 1% 2% 1%;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .user-details{
+            display: block;
+        }
+
+        .sign-in-container .search {
+            margin-right: 25px;
+        }
+    }
+
+    .ui-message-container{
+        color: white;
+        /* height: 34px; */
+        display: table;
+        width: 100%;
+        padding: 10px;
+        background-color: #b6882d;
+        border-radius: 5px;
+        margin: 0 0 16px;
+    }
+
+    .ui-message-contents{
+        display: inline-block;
+        font-weight: bold;
     }
 
 </style>
@@ -186,6 +312,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ title }}</title>
+    <link rel="icon" type="image/png" href="/img/flixter2.png">
 
     <link rel="stylesheet" type="text/css" href="/css/sematic-ui/semantic.min.css">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap/bootstrap.min.css">
@@ -196,16 +323,11 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
     {{!-- <link rel="stylesheet" type="text/css" href="/css/font-awesome/font-awesome-v4.7.css"> --}}
     <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lato:100i" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 
-    <script src="/js/jquery-3.1.1.min.js"></script>
-    <script src="/js/jquery.migrate.min.js"></script>
-    <script src="/slick-1.8.1/slick/slick.min.js"></script>
-    <script src="/js/sematic-ui/semantic.min.js"></script>
-    <script src="/js/bootstrap/bootstrap.min.js"></script>
-    <script src="/js/youtube-popup/grt-youtube-popup.js"></script>
+    
+
+   
 
 
 </head>
@@ -223,7 +345,7 @@
             
             <div class="sign-in-container">
                 {{#if user}}
-                    <div class="search" style="margin-right: 25px;">
+                    <div class="search">
                         <div class="ui icon movieSearch input">
                             <input type="text" placeholder="Search...">
                             <i class="search icon"></i>
@@ -234,16 +356,19 @@
                         <div class="user-details username">{{user.name}}</div>
                     </div>
                     <a href="/logout"> <div class="user-signout"><i class="fas fa-sign-out-alt"></i></div> </a>
-                {{else}}
-                    <a href="/login" class="authLink sign-in">
-                        <button class="ui inverted button sign-in-btn">
-                            Sign In
-                        </button>
-                    </a>
+               
                 {{/if}}     
             </div>
             
         </div>
+
+        <script src="/js/jquery-3.1.1.min.js"></script>
+        <script src="/js/jquery.migrate.min.js"></script>
+        <script src="/slick-1.8.1/slick/slick.min.js"></script>
+        {{!-- <script src="/js/sematic-ui/semantic.min.js"></script> --}}
+        <script src="/js/bootstrap/bootstrap.min.js"></script>
+        <script src="/js/youtube-popup/grt-youtube-popup.js"></script>
+
 
         <div class="content-section">
             {{{ body }}}
@@ -251,9 +376,10 @@
         
     </div>
 
-   
     
    
+    
+
 </body>
 </html>
 

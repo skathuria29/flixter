@@ -84,17 +84,27 @@
     }
 
     .latest-card-info{
-        width: 40%;
+        width: 350px;
         position: absolute;
-        bottom: 63px;
-        left: 40px;
+        bottom: 10px;
+        padding: 10px;
         color: white;
     }
 
     .fixed-loader{
         position: absolute;
-        top: 20%;
-        right: 45%;
+        top: 100px;
+        text-align: center;
+    }
+
+    @media (min-width : 45rem){
+        .latest-card-info{
+            width: 600px;
+            position: absolute;
+            bottom: 20px;
+            padding: 20px;
+            color: white;
+        }
     }
 
 
@@ -141,16 +151,39 @@
 <script>
 
     $(function(){
-        
         $('.main-view').prepend(window.loadingDots);
         $('.main-view').find('.loader').addClass('fixed-loader');
+
         setTimeout(function(){
             $('.main-view').find('.loader').remove();
              $('.slider-container').slick({infinite: true,
-                slidesToShow: 5,
-                slidesToScroll: 5,
+                slidesToShow: 6,
+                slidesToScroll: 6,
                 arrows: true,
-                accessibility: false
+                accessibility: false,
+                responsive: [
+                    {
+                    breakpoint: 1024,
+                    settings: "unslick"
+                    },
+                    {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
+                    }
+                    },
+                    {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
+                    }
+                    }
+                    // You can unslick at a given breakpoint now by adding:
+                    // settings: "unslick"
+                    // instead of a settings object
+                ]
             })
             $('.main-view-container').css('visibility' , 'visible');
         },300)

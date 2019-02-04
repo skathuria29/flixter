@@ -5,15 +5,14 @@
 
     .movie-info{
         width: 100%;
-        height: 75%;
+        height: 60%;
     }
 
     .movie-info-container {
-        width: 90%;
+        width: 100%;
         height: 100%;
         padding: 2%;
         margin: 0 auto;
-        background-color: #191919;
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
         display: flex;
@@ -21,20 +20,28 @@
         flex-wrap: nowrap;
         background-size: cover!important;
         background-position: 50%!important;
+        position: relative;
     }
 
     .movie-info-poster {
-        width: 400px;
-        height: 100%;
+        width: 150px;
+        height: 200px;
         cursor: pointer;
+        position: absolute;
+        bottom: -90px;
+        left: 20px;
+        display: none;
+        /* display: none; */
     }
 
     .movie-info-poster img {
         width: 100%;
         height: 100%;
     }
+
+    
     .movie-info .poster-wrapper{
-       padding: 10px 0px 0px 50px;
+        padding: 10px;
         color: #c6c6c6;
         background: rgba(0,0,0,.8);
         height: 100%;
@@ -55,46 +62,44 @@
     .header-info{
         color: #c6c6c6;
     }
-    .movie-overview{
-        font-size: 0.9rem;
+
+    .movie-overview {
+        font-size: 1rem;
         font-weight: 300;
-        width: 70%;
+        width: 100%;
     }
 
     .movie-info .subtext{
-        font-size: 0.8rem;
-        display: flex;
-        align-items: flex-start;
+        font-size: 1rem;
         color: inherit;
-        flex-wrap: nowrap;
-        margin-bottom: 30px;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
     }
 
-    .movie-info .subtext .release_date{
-        padding-right: 30px;
-        border-right: 1px solid #ccc;
-    }
-    .movie-info .subtext .duration{
-        padding: 0px 30px;
-        text-align: center;
-        border-right: 1px solid #ccc;
+    .movie-info .subtext-item{
+        {{!-- margin: 0px 10px 20px 0px; --}}
+        width: 50%;
+        flex-basis: 50%;
+        margin-bottom: 10px;
     }
 
     .movie-info .subtext .genre{
-        display: flex;
-        flex-wrap: nowrap;
-        align-items: flex-start;
-        padding: 0px 30px;
-        border-right: 1px solid #ccc;
+        {{!-- padding: 0px 30px; --}}
+        {{!-- border-right: 1px solid #ccc; --}}
     }
     .movie-info .subtext .genre a{
         text-decoration: none;
         color: inherit;
         text-align: center;
-        padding: 0px 5px;
+        padding: 0px 10px 0px 0px;
+        {{!-- padding: 0px 5px; --}}
     }
     .movie-info .subtext .trailer{
-        padding: 0px 30px;
+        padding-top: 15px;
+        {{!-- padding: 0px 30px; --}}
         cursor: pointer
     }
     .subtext .trailer span{
@@ -110,7 +115,6 @@
 
     .movie-content-wrapper .movie-credits{
         width: 100%;
-        height: 60%;
         margin: 4% 0px;
         padding: 0px 3%;
     }
@@ -129,13 +133,6 @@
         cursor: pointer;
     }
 
-    {{!-- .slick-slide.hover{
-        -webkit-transform: scale(1.2);
-        -moz-transform: scale(1.2);
-        -o-transform: scale(1.2);
-        transform: scale(1.2);
-        z-index: 2;
-    } --}}
     
     .slick-prev:before, .slick-next:before{
         color: #515151;
@@ -144,13 +141,15 @@
     .movie-content-wrapper{
         width: 100%;
         color: #c6c6c6;
+        margin-top: 20px;
     }
 
     .credit-card-item {
-        width: 8%;
+        width: 120px;
         height: 130px;
-        margin: 0px 2% 5% 0px;
+        margin: 0px 2% 12% 0px;
     }
+
     .credit-card-item img{
         width: 100%;
         height: 100%;
@@ -158,7 +157,6 @@
 
     .credit-content{
         width: 100%;
-        height: 100%;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -172,31 +170,147 @@
         text-decoration: none;
     }
     
+    .similar-movies .browser-card-img:hover {
+        -webkit-transform: scale(0.9);
+        transform: scale(0.9);
+    }
+
+    @media (min-width : 45rem){
+        .credit-card-item{
+            width: 120px;
+            height: 130px;
+            margin: 0px 2% 3% 1%;
+        }
+
+        .movie-info{
+            width: 100%;
+            height: 75%;
+        }
+
+        .movie-info-container {
+            width: 80%;
+        }
+
+        .movie-info-poster {
+            width: 400px;
+            height: 100%;
+            cursor: pointer;
+            position: static;
+            display: block;
+        }
+        .movie-info .poster-wrapper{
+            padding: 10px 0px 0px 50px;
+            color: #c6c6c6;
+            background: rgba(0,0,0,.8);
+            height: 100%;
+        }
+
+         .movie-content-wrapper{
+            width: 100%;
+            color: #c6c6c6;
+        }
+
+        .movie-overview{
+            font-size: 1rem;
+            font-weight: 300;
+            width: 90%;
+            word-spacing: 2px;
+        }
+
+        .movie-info .subtext{
+            font-size: 0.9rem;
+            color: inherit;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: row;
+            justify-content: left;
+        }
+
+        .movie-info .subtext .release_date{
+            padding-right: 30px;
+            {{!-- border-right: 1px solid #ccc; --}}
+        }
+        .movie-info .subtext .duration{
+            padding: 0px 30px;
+            text-align: center;
+            {{!-- border-right: 1px solid #ccc; --}}
+        }
+
+        .movie-info .subtext .genre{
+            padding: 0px 30px;
+            {{!-- border-right: 1px solid #ccc; --}}
+        }
+        .movie-info .subtext .genre .title-value{
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: flex-start;
+        }
+        .movie-info .subtext .genre a{
+            text-decoration: none;
+            color: inherit;
+            text-align: center;
+        }
+        .movie-info .subtext .trailer{
+            padding: 10px 30px;
+            cursor: pointer
+        }
+
+        .movie-info .subtext-item{
+            width: auto;
+            flex-basis: auto;
+        }
+    }
+
+    .subtext .subtext-item .title{
+        opacity: 0.7
+    }
+
+    .subtext .title-value{
+        text-align: left;
+    }
+
+    .movie-info .movie-info-wrapper{
+        background-size: 100%,cover!important;
+        background-position: 50%,50%!important;
+    }
+    
+    
 </style>
 
 <div class="movie-info">
     {{#if data.length}}
         {{#each data}}
-            <div class="movie-info-container" style="background:url('https://image.tmdb.org/t/p/w500/{{this.backdrop_path}}')">
+        <div class="movie-info-wrapper" style="background:linear-gradient(rgba(0, 0, 0, 0) 39%, rgba(0, 0, 0, 0) 41%, rgba(0, 0, 0, 0.65) 100%),url('https://image.tmdb.org/t/p/w500/{{this.backdrop_path}}'), rgb(28, 28, 28)">
+             <div class="movie-info-container">
                 <div class="movie-info-poster">
                     <img src="https://image.tmdb.org/t/p/w500/{{this.poster_path}}" alt="" onerror="this.src='/img/no-image.png'">
                 </div>
                 <div class="movie-info poster-wrapper"> 
                     <div class="header poster">
-                         <a href="https://www.imdb.com/title/{{this.imdb_id}}"><div class="movie-name">{{this.title}}</div></a>
+                         <a href="https://www.imdb.com/title/{{this.imdb_id}}"><h3 class="movie-name">{{this.title}}</h3></a>
                     </div>
                     <div class="subtext">
-                        <div class="release_date">{{this.release_date}}</div>
-                        <div class="duration">{{this.duration}}</div>
-                        <div class="genre">
-                            {{#if genres.length}}
-                                {{#each genres}}
-                                    <a href="/home/genre/{{this.name}}/{{this.id}}"><span class="genre-item">{{this.name}}</span></a>
-                                {{/each}}
-                            {{/if}}
+                        <div class="release_date subtext-item">
+                            <div class="title">Release Date</div>
+                            <div class="title-value">{{this.release_date}}</div>
+                        </div>
+                        <div class="duration subtext-item">
+                            <div class="title">Duration</div>
+                            <div class="title-value">{{this.duration}}</div>
+                        </div>
+                        <div class="genre subtext-item">
+                            <div class="title">Genre</div>
+                            <div class="title-value">
+                                {{#if genres.length}}
+                                    {{#each genres}}
+                                        <a href="/home/genre/{{this.name}}/{{this.id}}"><span class="genre-item">{{this.name}}</span></a>
+                                    {{/each}}
+                                {{/if}}
+                            </div>
                         </div>
                        
-                        <div class="trailer">
+                        <div class="trailer subtext-item">
                             <a href="#" class="youtube-link" youtubeid="{{trailer}}">
                                 <span><i class="fas fa-play"></i></span>Play trailer
                             </a>
@@ -204,11 +318,12 @@
                        
                     </div>
                     <div class="header-info">
-                        <div style="margin-bottom: 8px;font-size: 1.2rem;">Overview</div>
+                        <h4>Overview<h4>
                         <div class="movie-overview">{{this.overview}}</div>
                     </div>
                 </div>
              </div>
+        </div>
         {{/each}}
     {{/if}}
 </div>
@@ -257,6 +372,30 @@
         slidesToShow: 6,
         slidesToScroll: 6,
         arrows: true,
-            accessibility: false
+        accessibility: false,
+        responsive: [
+            {
+            breakpoint: 1024,
+            settings: "unslick"
+            },
+            {
+            breakpoint: 600,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2
+            }
+            },
+            {
+            breakpoint: 480,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2
+            }
+            }
+            // You can unslick at a given breakpoint now by adding:
+            // settings: "unslick"
+            // instead of a settings object
+        ]
+
     })
 </script>

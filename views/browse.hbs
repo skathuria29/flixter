@@ -1,90 +1,8 @@
 <style>
-    .browse-view{
-        position: relative;
-        height: 100%;
-        z-index: 0;
-        padding-top: 2%;
-        width: 90%;
-        color: #c6c6c6;
-    }
 
-    .browse-view-item{
-        width: 18%;
-        height: 250px;
-        float: left;
-        background-color: #272626;
-        margin: 0px 1% 2% 1%;
-        cursor: pointer;
-        position: relative;
+    .app-container {
+        background-image: none ;
     }
-
-   
-    .browse-view-container{
-        width: 90%;
-        height: 100%;
-        margin: 0 auto;
-        margin-top: 2%;
-    }
-
-    .content-section{
-        background-color: #141414;
-    }
-    .browser-card-img{
-        width: 100%;
-        height: 100%;
-        position: relative;
-        transition:all .2s ease-in-out;
-        -webkit-transition:all .2s ease-in-out;
-        -moz-transition:all .2s ease-in-out;
-        -ms-transition:all .2s ease-in-out;
-        -o-transition:all .2s ease-in-out;
-    }
-
-    .browser-card-img:hover{
-        -webkit-transform: scale(1.2);
-        -moz-transform: scale(1.2);
-        -o-transform: scale(1.2);
-        transform: scale(1.2);
-        z-index: 2;
-    }
-
-    .card-info {
-        position: absolute;
-        bottom: 0%;
-        height: 200px;
-        color: white;
-        padding: 10px;
-        /* background-color: #605f5f; */
-        /* opacity: 0.5; */
-        width: 100%;
-        background-color: rgba(183, 183, 183, 0.3);
-        display: none;
-    }
-
-    .card-name {
-        font-weight: bold;
-        height: 25px;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-    }
-
-    .card-release-date{
-        height: 20px;
-    }
-
-    .card-overview{
-        display: -webkit-box;
-        -webkit-line-clamp: 7;
-        -webkit-box-orient: vertical;
-        /* max-width: 156px; */
-        overflow: hidden;
-        text-overflow: ellipsis;
-        height: 130px;
-        font-size: 0.9em;
-        margin-top: 5px;
-    }
-
     .data-error-message{
         text-align: center;
         font-size: 2rem;
@@ -117,128 +35,109 @@
 
 
 <script>
-        
-       // const url = "{{url}}";
-        let search = '';
-        let genre = '' ;
-        {{#if search}}
-            search = "{{search}}";
-        {{/if}}
 
-        {{#if genre}}
-            genre = "{{genre}}";
-        {{/if}}
-       
-        $('.app-container').css('background-image', 'none');
-        window.lastHeight = 0;
-        let pageNumber = {{page}};
-        //console.log(pageNumber);
+    let search = '';
+    let genre = '' ;
+    {{#if search}}
+        search = "{{search}}";
+    {{/if}}
 
-        let getMovies = (url, page) => {
-            return new Promise((resolve, reject) => {
-                $.ajax({
-                        method : 'GET',
-                        url : url + "&page="+ pageNumber,
-                        success:function(data) {
-                            
-                            //console.log(data);
-                        }
-                    })
-            })
-             
-        }
+    {{#if genre}}
+        genre = "{{genre}}";
+    {{/if}}
+    
+    $('.app-container').css('background-image', 'none');
+    window.lastHeight = 0;
+    let pageNumber = {{page}};
+    //console.log(pageNumber);
 
-        let loadMoreData = () => {
+    let getMovies = (url, page) => {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                    method : 'GET',
+                    url : url + "&page="+ pageNumber,
+                    success:function(data) {
+                        
+                        //console.log(data);
+                    }
+                })
+        })
             
-            // var scrollTop = $(window).scrollTop();
+    }
 
-            if ($(window).scrollTop() == ($(document).height() - $(window).height())) {
-                //alert("reached");
-                pageNumber += 1;
-                if($('.browse-view-container').hasClass('loading-data')){
-                    
-                    //make an ajax call and ask for more data
-                    let url = '' ,  extraParams = '';
-                    const key = '?api_key=dc2c0d121d43c7efe3c541ff85273040';
-                    if(search){
-                         url =  'http://api.themoviedb.org/3/search/movie';
-                         extraParams = `&language=en-US&sort_by=popularity.desc&query=${search}`;
-                    }
-                    else if(genre){
-                         url = 'http://api.themoviedb.org/3/discover/movie';
-                        extraParams = `&language=en-US&sort_by=popularity.desc&with_genres=${genre}`;
-                    }
-                    else{
-                        url = 'http://api.themoviedb.org/3/discover/movie';
-                        extraParams = "&language=en-US&sort_by=popularity.desc";
-                    }
-                      
-
-                    $.ajax({
-                        type: 'GET',
-                        url: url + key + extraParams + "&page=" + pageNumber,
-                        async: false,
-                        contentType: 'application/json',
-                        dataType: 'jsonp',
-                        success: function(json) {
-                            
-                           // console.dir(json);
-                            $('.browse-view-container').find('.loader').remove();
-                            const results = json.results;
-                            const base = $('.browse-view-container');
-                           setTimeout(function(){
-                                for(let each of results){
-                                    let html = `<div class="browse-view-item">
-                                            <a href="/home/movie/${each.id}" ><img class="browser-card-img" src="https://image.tmdb.org/t/p/w500/${each.poster_path}" alt="" onerror="this.src='/img/no-image.png'"> </a>
-                                             <div class="card-info">
-                                                <div class="card-name">${each.original_title}</div>
-                                                <div class="card-released-date">${each.release_date}</div>
-                                                <div class="card-overview">${each.overview}</div>
-                                            </div>
-                                        </div>`;
-
-                                    $('.browse-view-container').append(html);
-                                    $('.browse-view-container').append(window.loadingDots);
-                                }
-                           }, 500)
-
-                            
-                        },
-                        error: function(e) {
-                            console.log(e.message);
-                        }
-                    });
+    let loadMoreData = () => {
+        if ($(window).scrollTop() == ($(document).height() - $(window).height())) {
+            pageNumber += 1;
+            if($('.browse-view-container').hasClass('loading-data')){
+                //make an ajax call and ask for more data
+                let url = '' ,  extraParams = '';
+                const key = '?api_key=dc2c0d121d43c7efe3c541ff85273040';
+                if(search){
+                        url =  'https://api.themoviedb.org/3/search/movie';
+                        extraParams = `&language=en-US&sort_by=popularity.desc&query=${search}`;
+                }
+                else if(genre){
+                        url = 'https://api.themoviedb.org/3/discover/movie';
+                    extraParams = `&language=en-US&sort_by=popularity.desc&with_genres=${genre}`;
                 }
                 else{
-
-                    $('.browse-view-container').append(window.loadingDots);
-                    $('.browse-view-container').addClass('loading-data');
-
-                    let maxHeight = $('.browse-view').height();
-                    let loadingDivHeight = $('#loader-4').height() + 10;
-                    $('.content-section').css({
-                        'height' : maxHeight + loadingDivHeight + "px"
-                    })
-                   
+                    url = 'https://api.themoviedb.org/3/discover/movie';
+                    extraParams = "&language=en-US&sort_by=popularity.desc";
                 }
+                    
+
+                $.ajax({
+                    type: 'GET',
+                    url: url + key + extraParams + "&page=" + pageNumber,
+                    async: false,
+                    contentType: 'application/json',
+                    dataType: 'jsonp',
+                    success: function(json) {
+                        
+                        // console.dir(json);
+                        $('.browse-view-container').find('.loader').remove();
+                        const results = json.results;
+                        const base = $('.browse-view-container');
+                        setTimeout(function(){
+                            for(let each of results){
+                                let html = `<div class="browse-view-item">
+                                        <a href="/home/movie/${each.id}" ><img class="browser-card-img" src="https://image.tmdb.org/t/p/w500/${each.poster_path}" alt="" onerror="this.src='/img/no-image.png'"> </a>
+                                            <div class="card-info">
+                                            <div class="card-name">${each.original_title}</div>
+                                            <div class="card-released-date">${each.release_date}</div>
+                                            <div class="card-overview">${each.overview}</div>
+                                        </div>
+                                    </div>`;
+
+                                $('.browse-view-container').append(html);
+                                $('.browse-view-container').append(window.loadingDots);
+                            }
+                        }, 500)
+
+                        
+                    },
+                    error: function(e) {
+                        console.log(e.message);
+                    }
+                });
+            }
+            else{
+
+                $('.browse-view-container').append(window.loadingDots);
+                $('.browse-view-container').addClass('loading-data');
+
+                let maxHeight = $('.browse-view').height();
+                let loadingDivHeight = $('#loader-4').height() + 10;
+                $('.content-section').css({
+                    'height' : maxHeight + loadingDivHeight + "px"
+                })
+                
             }
         }
+    }
 
 
     window.addEventListener('scroll', loadMoreData);
-
-    {{!-- $('.browse-view-item').hover(function(){
-        
-    }) --}}
-
-    $('.browse-view-container').on('hover' , '.browser-view-item' , function(){
-        
-    }) 
-
-    $('.browse-view-container').on('click' , '.browse-view-item' , function(){
-        
-    })    
-    
 
    
 </script>
