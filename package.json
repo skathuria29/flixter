@@ -21,7 +21,7 @@
     "moment": "^2.23.0",
     "mongoose": "^5.7.5",
     "mustache": "^2.3.2",
-    "nodemailer": "^4.6.8",
+    "nodemailer": "^6.4.16",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "request": "^2.88.0",
